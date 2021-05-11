@@ -15,10 +15,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ContextDataSource.class})
+@ContextConfiguration(classes = { ContextRoot.class })
 public class ContextDataSourceTest {
 	private static final Log log = LogFactory.getLog(ContextDataSource.class);
-		@After
+
+	@After
 	public void tearDown() throws Exception {
 		System.out.println();
 
@@ -29,10 +30,10 @@ public class ContextDataSourceTest {
 
 	@Test
 	public void testDataSource() throws SQLException {
-	log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-	log.debug("DataSource " + dataSource);
-	log.debug("LoginTimeout " + dataSource.getLoginTimeout());
-	Assert.assertNotNull(dataSource);
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		log.debug("DataSource " + dataSource);
+		log.debug("LoginTimeout " + dataSource.getLoginTimeout());
+		Assert.assertNotNull(dataSource);
 	}
 
 }

@@ -13,9 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ControllerConfig.class})
-public class MyBatisSqlSessionTest {
-	private static final Log log = LogFactory.getLog(MyBatisSqlSession.class);
+@ContextConfiguration(classes = {ContextRoot.class})
+public class ContextSqlSessionTest {
+	private static final Log log = LogFactory.getLog(ContextSqlSession.class);
 	
 	@After
 	public void tearDown() throws Exception {

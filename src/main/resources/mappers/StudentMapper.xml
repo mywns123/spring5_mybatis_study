@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring5_mybatis_study.mapper.StudentMapper">
+	
+	<sql id="selectSQL">
+		select stud_id, name, email, dob, phone
+		from STUDENTS
+	</sql>
+	
+	<sql id="whereSQL">
+		<where>
+			<if test="studId != null">
+				stud_id = #{studId}
+			</if>
+		</where>	
+	</sql>
+	
+	<select id="selectStudentById" parameterType="Student" resultType="Student">
+		<include refid="selectSQL"/>
+		<include refid="whereSQL"/>			
+	</select>
+	
+	<resultMap type="Student" id="stdResult">
+		<id column="stud_id" property="studId"/>
+		<result column="f" property="phone.countryCode"/>	
+		<result column="m" property="phone.stateCode"/>	
+		<result column="l" property="phone.number"/>	
+	</resultMap>	
+	<select id="selectStudentByIdWithResultMap" parameterType="Student" resultMap="stdResult">
+		select stud_id, name, email, dob,
+			substring(phone,1,3)as f, 
+			substring(phone,5,3)as m, 
+			substring(phone,9,4)as l 
+		from STUDENTS
+		<include refid="whereSQL"/>		
+	</select>
+
+	<select id="selectStudentByAll" resultType="Student">
+		<include refid="selectSQL"/>
+	</select>
+	
+	<insert id="insertStudent" parameterType="Student">
+		insert into students(stud_id, name, email, phone, dob)
+		values(#{studId}, #{name}, #{email}, #{phone}, #{dob})	
+	</insert>
+	
+	<delete id="deleteStudent" parameterType="Student">
+		delete from students
+		<include refid="whereSQL"/>	
+	</delete>
+	
+	<update id="updateStudent" parameterType="Student">
+		update students 
+		set name = #{name} , email =#{email}  , phone = #{phone} , dob  = #{dob}
+		<include refid="whereSQL"/>	
+	</update>
+
+	<select id="selectStudentByAllForListHashmap" resultType="map">
+		<include refid="selectSQL"/>
+	</select>
+	
+	<resultMap id="StudentResult" type="Student">
+		<id property="studId" column="stud_id"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
+		<result property="dob" column="dob"/>
+	</resultMap>
+	
+	<resultMap id="StudentResultAssociation" type="Student" extends="StudentResult">
+		<association property="address" resultMap="spring5_mybatis_study.mapper.AddressMapper.AddressResult"></association>
+	</resultMap>
+	
+	<select id="selectStudentByIdAssociation" resultMap="StudentResultAssociation">
+		select stud_id, name, email, phone, dob,
+		  	   a.addr_id, street, city, state, zip, country
+	  	  from STUDENTS s join addresses a
+	        on s.addr_id  = a.addr_id 
+	     <include refid="whereSQL"/>		
+	</select>
+	
+</mapper>
