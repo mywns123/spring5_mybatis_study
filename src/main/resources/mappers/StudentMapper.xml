@@ -3,7 +3,7 @@
 <mapper namespace="spring5_mybatis_study.mapper.StudentMapper">
 	
 	<sql id="selectSQL">
-		select stud_id, name, email, dob, phone
+		select stud_id, name, email, dob, phone , gender
 		from STUDENTS
 	</sql>
 	
@@ -78,5 +78,11 @@
 	        on s.addr_id  = a.addr_id 
 	     <include refid="whereSQL"/>		
 	</select>
+	
+	<insert id="insertEnumStudent" parameterType="Student">
+		insert into students(stud_id, name, email, phone, dob, gender)
+		values(#{studId}, #{name}, #{email}, #{phone}, #{dob}, #{gender})	
+	</insert>
+	
 	
 </mapper>
