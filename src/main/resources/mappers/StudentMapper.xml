@@ -4,13 +4,24 @@
 	
 	<sql id="selectSQL">
 		select stud_id, name, email, dob, phone , gender
-		from STUDENTS
+		  from STUDENTS
 	</sql>
 	
 	<sql id="whereSQL">
 		<where>
 			<if test="studId != null">
 				stud_id = #{studId}
+			</if>
+		</where>	
+	</sql>
+	
+	<sql id="where_name_email">
+		<where>
+			<if test="name != null">
+				name = #{name}
+			</if>
+			<if test="email != null">
+				And email = #{email}
 			</if>
 		</where>	
 	</sql>
@@ -65,6 +76,7 @@
 		<result property="email" column="email"/>
 		<result property="phone" column="phone"/>
 		<result property="dob" column="dob"/>
+		<result property="gender" column="gender"/>
 	</resultMap>
 	
 	<resultMap id="StudentResultAssociation" type="Student" extends="StudentResult">
@@ -83,6 +95,21 @@
 		insert into students(stud_id, name, email, phone, dob, gender)
 		values(#{studId}, #{name}, #{email}, #{phone}, #{dob}, #{gender})	
 	</insert>
+	
+	<select id="selectStudentByMap" parameterType="map"  resultMap="StudentResult">
+		<include refid="selectSQL"/>
+		<include refid="where_name_email"/>
+	</select>
+	
+	<select id="selectAllStudentByMap" parameterType="map" resultMap="StudentResult">
+		<include refid="selectSQL"/>
+		<include refid="where_name_email"/>
+	</select>
+	
+	<select id="selectStudentForMap" parameterType="int" resultMap="StudentResult">
+		<include refid="selectSQL"/>
+		<include refid="whereSQL"/>
+	</select>
 	
 	
 </mapper>

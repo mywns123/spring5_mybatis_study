@@ -3,6 +3,7 @@ package spring5_mybatis_study.mapper;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -162,4 +163,56 @@ public class StudentMapperTest {
 		Assert.assertEquals(1, res1);			
 	}
 	
+	@Test
+	public void test11deleteStudent() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		int deleteStudent = mapper.deleteStudent(3);
+		int deleteStudent1 = mapper.deleteStudent(4);
+		Assert.assertSame(1, deleteStudent);
+		Assert.assertSame(1, deleteStudent1);
+	}
+	
+	@Test
+	public void test12selectStudentByMap() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Map<String, String> maps = new HashMap<>();
+		maps.put("name", "Timothy");
+		maps.put("email", "test@test.co.kr");
+		Student student = mapper.selectStudentByMap(maps);
+		Assert.assertNotNull(student);
+		log.debug(student.toString());
+		
+		maps.remove("email");
+		student = mapper.selectStudentByMap(maps);
+		log.debug(student.toString());
+		
+		maps.clear();
+		maps.put("email", "test@test.co.kr");
+		student = mapper.selectStudentByMap(maps);
+		log.debug(student.toString());
+	}
+	
+	@Test
+	public void test13selectAllStudentByMap() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Map<String, String> maps =new HashMap<>();
+		maps.put("name", "Timothy");
+		maps.put("email", "test@test.co.kr");
+		List<Student> list = mapper.selectAllStudentByMap(maps);
+		Assert.assertNotNull(list);
+		list.stream().forEach(System.out::println);
+		
+		maps.remove("email");
+		list = mapper.selectAllStudentByMap(maps);
+		list.stream().forEach(System.out::println);
+		
+		maps.clear();
+		maps.put("email", "test@test.co.kr");
+		list = mapper.selectAllStudentByMap(maps);
+		list.stream().forEach(System.out::println);
+		
+		maps.clear();
+		list = mapper.selectAllStudentByMap(maps);
+		list.stream().forEach(System.out::println);		
+	}
 }
