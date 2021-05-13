@@ -31,7 +31,7 @@ public class UserPicMapperTest {
 
 	@Autowired
 	private UserPicMapper mapper;
-	
+
 	@After
 	public void tearDown() throws Exception {
 		System.out.println();
@@ -54,23 +54,23 @@ public class UserPicMapperTest {
 		byte[] pic = null;
 		File file = new File(System.getProperty("user.dir") + "\\images\\lyj.jpg");
 		System.out.println(file.getPath());
-		try(InputStream is = new FileInputStream(file);){
+		try (InputStream is = new FileInputStream(file);) {
 			pic = new byte[is.available()];
 			is.read(pic);
-		} catch (FileNotFoundException e) {			
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
+		}
 		return pic;
 	}
 
 	@Test
 	public void test02GetUserPic() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		//userPic 테이블의 이미지파일을 프로젝트 폴더 /pics 경로에 로드
+		// userPic 테이블의 이미지파일을 프로젝트 폴더 /pics 경로에 로드
 		UserPic userPic = mapper.getUserPic(1);
-		if(userPic.getPic() != null) {
+		if (userPic.getPic() != null) {
 			File file = getPicFile(userPic);
 			log.debug("file path " + file.getAbsolutePath());
 		}
@@ -79,13 +79,13 @@ public class UserPicMapperTest {
 
 	private File getPicFile(UserPic userPic) {
 		File pics = new File(System.getProperty("user.dir") + "\\pics\\");
-		if(!pics.exists()) {
+		if (!pics.exists()) {
 			pics.mkdir();
 		}
 		File file = new File(pics, userPic.getName() + ".jpg");
-		try(FileOutputStream output = new FileOutputStream(file)){
+		try (FileOutputStream output = new FileOutputStream(file)) {
 			output.write(userPic.getPic());
-		} catch (IOException e) {			
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return file;
@@ -95,7 +95,7 @@ public class UserPicMapperTest {
 	public void test03DeleteUserPic() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		int res = mapper.deleteUserPic(2);
-		
+
 		Assert.assertEquals(1, res);
 	}
 

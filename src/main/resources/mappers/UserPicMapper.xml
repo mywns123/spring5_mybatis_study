@@ -6,17 +6,17 @@
 		insert into user_pics(id, name, pic, bio)
 		values (#{id}, #{name}, #{pic}, #{bio})
 	</insert>
-	
+
 	<select id="getUserPic" resultType="UserPic">
 		select id, name, pic, bio
 		  from user_pics
 		 where id = #{id}
 	</select>
 
-	<delete id="deleteUserPic" >	
-		delete 
+	<delete id="deleteUserPic">
+		delete
 		  from user_pics
-		 where id = #{id}
+	   	 where id = #{id}
 	</delete>
 
 </mapper>

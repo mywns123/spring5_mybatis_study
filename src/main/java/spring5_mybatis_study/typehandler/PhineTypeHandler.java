@@ -16,7 +16,6 @@ public class PhineTypeHandler extends BaseTypeHandler<PhoneNumber> {
 	public void setNonNullParameter(PreparedStatement ps, int i, PhoneNumber parameter, JdbcType jdbcType)
 			throws SQLException {
 		ps.setString(i, parameter.toString());
-		
 	}
 
 	@Override

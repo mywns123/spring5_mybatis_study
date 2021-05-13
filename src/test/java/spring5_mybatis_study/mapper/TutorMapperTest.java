@@ -1,7 +1,5 @@
 package spring5_mybatis_study.mapper;
 
-
-
 import java.util.List;
 
 import org.apache.ibatis.logging.Log;
@@ -26,7 +24,7 @@ public class TutorMapperTest {
 
 	@Autowired
 	private TutorMapper mapper;
-	
+
 	@After
 	public void tearDown() throws Exception {
 		System.out.println();
@@ -35,17 +33,17 @@ public class TutorMapperTest {
 	@Test
 	public void testSelectTutorByTutorId() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
+
 		Tutor findTutor = new Tutor();
 		findTutor.setTutorId(1);
-		
+
 		Tutor tutor = mapper.selectTutorByTutorId(findTutor);
 		Assert.assertEquals(tutor.getTutorId(), findTutor.getTutorId());
-		
+
 		log.trace(tutor.getTutorId() + ":" + tutor.getName());
 		log.debug(tutor.toString());
-		
-		List<Course> list = tutor.getCourse();		
+
+		List<Course> list = tutor.getCourse();
 		list.stream().forEach(System.out::println);
 	}
 
