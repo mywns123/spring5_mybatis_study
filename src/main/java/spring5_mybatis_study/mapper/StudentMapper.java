@@ -29,4 +29,6 @@ public interface StudentMapper {
 	List<Student> selectAllStudentByMap(Map<String, String> map);
 
 	Map<Integer, String> selectStudentForMap(Student student);
+	
+	int updateSetStudent(Student student);
 }

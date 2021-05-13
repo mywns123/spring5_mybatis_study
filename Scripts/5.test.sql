@@ -74,5 +74,8 @@ from courses
 where start_date >= '2013-02-01' and end_date <= '2013-07-01';
 
 
+insert into courses(course_id, name, description, start_date, end_date, tutor_id)
+values ();
 
-
+delete from courses where course_id in(5,6);
+   

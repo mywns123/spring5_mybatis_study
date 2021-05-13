@@ -21,6 +21,14 @@ public interface CourseMapper {
 	
 	/* 동적 SQL - foreach조건 */
 	List<Course> selectCoursesForeachbyTutors(Map<String, Object> map);
+	
+	/* foreach */
+	int insertCourses(Map<String, Object> map);
+	
+	/* foreach */
+	int deleteCourses(Map<String, Object> map);
+	
+	int updateSetCourses(Map<String, Object> map);
 }
 
 
