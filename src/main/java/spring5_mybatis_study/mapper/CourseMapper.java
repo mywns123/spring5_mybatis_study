@@ -28,7 +28,16 @@ public interface CourseMapper {
 	/* foreach */
 	int deleteCourses(Map<String, Object> map);
 	
+	/* foreach */
 	int updateSetCourses(Map<String, Object> map);
+	
+	/* Transaction */
+	int insertCourse(Course course);
+	
+	/* Transaction */
+	int deleteCourse(int courseId);
+	
+	
 }
 
 

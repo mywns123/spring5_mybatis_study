@@ -62,7 +62,7 @@ create table mybatis_study.course_enrollment(
 	references mybatis_study.courses (course_id)
 ) comment '수강등록';
 
-alter table students add gender tinyint unsigned;
+alter table mybatis_study.students add gender tinyint unsigned;
 
 create table mybatis_study.user_pics(
 	id int(11) not null auto_increment comment 'id',

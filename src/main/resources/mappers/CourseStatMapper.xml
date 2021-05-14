@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring5_mybatis_study.mapper.CourseStatMapper">
+
+	<!-- procedure -->	
+	<select id="getCourseCountByTutor" statementType="CALLABLE" resultType="CourseStat">
+		{call course_total(${param1, mode =In, jdbcType=Integer})}
+	</select>
+	
+	<select id="getCourseCountByTutors" statementType="CALLABLE" resultType="CourseStat">
+		{call course_total_group}
+	</select>
+
+</mapper>

@@ -7,6 +7,8 @@ select * from user_pics;
 
 delete  from user_pics where id >2;
 delete  from  students where stud_id >2;
+delete from tutors where tutor_id = 5;
+delete from courses where course_id =8;
 
 select stud_id, name, email, dob, phone
 from STUDENTS
@@ -79,3 +81,8 @@ values ();
 
 delete from courses where course_id in(5,6);
    
+
+insert into tutors (tutor_id, name, email, phone, addr_id)
+values ();
+
+delete from tutors where tutor_id = 5 ;

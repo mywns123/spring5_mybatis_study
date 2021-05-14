@@ -10,7 +10,7 @@ import org.apache.ibatis.type.JdbcType;
 
 import spring5_mybatis_study.dto.PhoneNumber;
 
-public class PhineTypeHandler extends BaseTypeHandler<PhoneNumber> {
+public class PhoneTypeHandler extends BaseTypeHandler<PhoneNumber> {
 
 	@Override
 	public void setNonNullParameter(PreparedStatement ps, int i, PhoneNumber parameter, JdbcType jdbcType)

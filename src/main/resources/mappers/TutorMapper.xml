@@ -17,4 +17,13 @@
 		 where t.tutor_id= #{tutorId}
 	</select>
 
+	<!-- Transaction -->
+	<insert id="insertTutor" parameterType="Tutor">
+		insert into tutors (tutor_id, name, email, phone, addr_id)
+		values (#{tutorId}, #{name}, #{email}, #{phone}, #{address.addrId})
+	</insert>
+	
+	<delete id="deleteTutor" parameterType="int">
+		delete from tutors where tutor_id = #{tutorId}
+	</delete>
 </mapper>

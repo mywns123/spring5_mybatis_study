@@ -202,6 +202,28 @@ public class CourseMapperTest {
 		Assert.assertSame(1, res);
 	}
 		
+	@Test
+	public void test11InsertCourse() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		Course course = new Course(7, "oracle", "database", new Date(), new Date(), 4);
+		int res =  mapper.insertCourse(course);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tutorId", 4);
+		
+		List<Course> list = mapper.selectCourseByCondition(map);
+		list.stream().forEach(s -> log.debug(s.toString()));		
+		
+		Assert.assertEquals(1, res);		
+	}
 	
+	@Test
+	public void test12DeleteCourse() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		int res = mapper.deleteCourse(7);
+		Assert.assertEquals(1, res);		
+	}
 	
 }
